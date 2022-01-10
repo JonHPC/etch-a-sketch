@@ -1,3 +1,10 @@
+let classicModeOn = true;
+let rainbowModeOn = false;
+let eraserModeOn = false;
+
+let rainbowColor = "#000000";
+
+
 const container = document.getElementById("container");
 
 function makeRows(rows, cols){
@@ -8,8 +15,15 @@ function makeRows(rows, cols){
         cell.className = "grid-item";
         container.appendChild(cell).id = i;
         cell.addEventListener('mouseover',function(e){
-            cell.style.backgroundColor = "black";
-            console.log("color changed");
+            if(classicModeOn){
+                cell.style.backgroundColor = "black";
+            } else if(rainbowModeOn){
+                rainbowColor = Math.floor(Math.random()*16777215).toString(16);
+                cell.style.backgroundColor = "#" + rainbowColor;
+            } else {
+                cell.style.backgroundColor = "rgb(165,165,165)";
+            }
+            
         });
     };
     
@@ -35,10 +49,13 @@ function clearScreen(){
 
 //Add button to select "rainbow colow" mode
 const rainbowBtn = document.getElementById("rainbow");
-rainbowBtn.addEventLister('click',rainbowMode);
+rainbowBtn.addEventListener('click',rainbowMode);
 
 function rainbowMode(){
     console.log("activate rainbow mode");
+    classicModeOn = false;
+    rainbowModeOn = true;
+    eraserModeOn = false;
 }
 
 //Add a button to go back to "classic mode"
@@ -47,6 +64,9 @@ classicBtn.addEventListener('click', classicMode);
 
 function classicMode(){
     console.log("activate classic mode");
+    classicModeOn = true;
+    rainbowModeOn = false;
+    eraserModeOn = false;
 }
 
 //add a button to go to "eraser mode"
@@ -55,6 +75,9 @@ eraserBtn.addEventListener('click', eraserMode);
 
 function eraserMode(){
     console.log("activate eraser")
+    classicModeOn = false;
+    rainbowModeOn = false;
+    eraserModeOn = true;
 }
 
 //add a slider or input to select grid size, ie 16x16, 48x48 etc
