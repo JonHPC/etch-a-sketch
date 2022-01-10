@@ -47,7 +47,7 @@ makeRows(16,16);//initially create a 16x16 drawing area
 //sets initial mode to classicMode
 classicBtn.focus();
 
-function classicMode(e){
+function classicMode(){
     classicModeOn = true;
     rainbowModeOn = false;
     eraserModeOn = false;
@@ -89,6 +89,8 @@ function clearScreen(){
     }
     reset();//clears the drawing canvas
     makeRows(rowSize,colSize); //create a new canvas based on the slider 
+    classicMode();
+    classicBtn.focus();
 }
 
 
