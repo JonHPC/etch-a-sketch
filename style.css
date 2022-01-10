@@ -5,9 +5,11 @@
 
 body{
     display:grid;
-    grid-template-rows:1fr 0.5fr 6fr 0.3fr 0.5fr 0.5fr;
+    grid-template-rows:1fr 0.3fr 6fr 0.3fr 0.3fr 0.5fr;
     grid-template-columns: 2fr 2fr 2fr;
     background-color:gray;
+    width:100%;
+    height:100%;
 }
 
 .header{
@@ -19,8 +21,7 @@ body{
     grid-column: 1 / span 3;
     grid-row-start:1;
     color:white;
-    
-    
+
 }
 
 .spacer0{
@@ -28,7 +29,6 @@ body{
     grid-row-start:2;
 }
 #container{
-       
     display:grid;
     grid-gap: 0px;
     grid-template-rows: repeat(var(--grid-rows), 1fr);
@@ -40,24 +40,55 @@ body{
     background-color:rgb(165, 165, 165);
     grid-column:2;
     grid-row-start:3;
-    
-    
 }
 
-.grid-item{
-    padding:1em;
-    border:1px solid rgb(184, 184, 184);
-    
-}
 
 .controls{
     background-color:gray;
     display:flex;
-    justify-content:space-around;
+    justify-content:space-between;
     grid-column-start:2;
     grid-row-start:4;
-    
-    
+    padding-top:8px;
+    gap: 8px;
+}
+
+button{
+    background-color:rgb(51, 51, 51);
+    border:none;
+    color:white;
+    padding:8px 16px;
+    text-align:center;
+    text-decoration:none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius:8px;
+    min-width:100px;
+}
+
+button:hover{
+    background-color:rgb(78, 78, 78);
+}
+
+#classic:focus, #rainbow:focus, #eraser:focus{
+    background-color:rgb(139, 139, 139);
+    box-shadow:inset 0px 0px 5px #c1c1c1;
+    outline:none;
+}
+
+button:active{
+    background-color:rgb(139, 139, 139);
+    box-shadow:inset 0px 0px 5px #c1c1c1;
+}
+
+#sizeText{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:white;
+    text-align: center;
+}
+
+.slider::-webkit-slider-thumb{
+    background:rgb(167, 42, 42);
 }
 
 .spacer{
@@ -73,9 +104,5 @@ body{
     padding:16px;
     grid-column:1 /span 3;
     grid-row-start:6;
-    height:100%;
-    
-    
-    
-    
+    height:100%; 
 }

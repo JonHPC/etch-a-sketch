@@ -11,10 +11,14 @@
         <div class="spacer0"></div>
         <div id="container"></div>
         <div class="controls">
-            <button id="classic">Classic</button>
-            <button id="rainbow">Rainbow</button>
-            <button id="eraser">Eraser</button>
-            <button id="clear">Clear</button>
+            <button id="classic" :hover :focus>Classic</button>
+            <button id="rainbow" :hover :focus>Rainbow</button>
+            <button id="eraser" :hover :focus>Eraser</button>
+            <button id="clear" :hover :active>New</button>
+            <div class="slidercontainer">
+                <p id="sizeText">16 x 16</p>
+                <input type="range" min="16" max="100" value="16" class="slider" id="size">
+            </div>
         </div>
         <div class="spacer"></div>
         <div class="footer">Copyright © 2022 Jonathan Chen</div>

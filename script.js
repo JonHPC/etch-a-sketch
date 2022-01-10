@@ -1,12 +1,24 @@
 let classicModeOn = true;
 let rainbowModeOn = false;
 let eraserModeOn = false;
-
-let rainbowColor = "#000000";
-
+let rowSize = 16;//stores the row size
+let colSize = 16;//stores the col size
+let rainbowColor = "#000000"; //stores color for rainbowMode
 
 const container = document.getElementById("container");
+const classicBtn = document.getElementById("classic");
+const rainbowBtn = document.getElementById("rainbow");
+const eraserBtn = document.getElementById("eraser");
+const clearBtn = document.getElementById("clear");
+const slider = document.getElementById("size");
+const output = document.getElementById("sizeText");
 
+classicBtn.addEventListener('click', classicMode);
+rainbowBtn.addEventListener('click',rainbowMode);
+eraserBtn.addEventListener('click', eraserMode);
+clearBtn.addEventListener('click',clearScreen);
+
+//takes two inputs (row and col) to create the drawing area
 function makeRows(rows, cols){
     container.style.setProperty('--grid-rows', rows);
     container.style.setProperty('--grid-cols', cols);
@@ -29,58 +41,60 @@ function makeRows(rows, cols){
     
 };
 
-makeRows(16,16);
+//creates the initial 16x16 drawing area
+makeRows(16,16);//initially create a 16x16 drawing area
+
+//sets initial mode to classicMode
+classicBtn.focus();
+
+function classicMode(e){
+    classicModeOn = true;
+    rainbowModeOn = false;
+    eraserModeOn = false;
+}
+
+function rainbowMode(){
+    classicModeOn = false;
+    rainbowModeOn = true;
+    eraserModeOn = false;
+}
+
+function eraserMode(){
+    classicModeOn = false;
+    rainbowModeOn = false;
+    eraserModeOn = true;
+}
+
+//updates the text above the slider
+output.innerHTML = slider.value + " x " + slider.value;
+
+//Update the current slider value (each time you drag the slider handle)
+slider.oninput = function(){
+    rowSize = this.value;
+    colSize = this.value;
+    output.innerHTML = rowSize + " x " + colSize;
+}
+
+//clears the divs in preparation of creating more in a different pixel resolution
+function reset(){
+    document.querySelectorAll(".grid-item").forEach((e) => e.parentNode.removeChild(e));
+}
 
 //clears the current sketch pad
-const clearBtn = document.getElementById("clear");
-clearBtn.addEventListener('click',clearScreen);
-
 function clearScreen(){
     //clears the drawing board
     const pixels = document.getElementsByClassName("grid-item");
     for(let j = 0; j < pixels.length; j++){
         pixels[j].style.backgroundColor = "rgb(165,165,165)";
     }
-
-    //add a shaking animation when clearing the screen
+    reset();//clears the drawing canvas
+    makeRows(rowSize,colSize); //create a new canvas based on the slider 
 }
 
 
 
-//Add button to select "rainbow colow" mode
-const rainbowBtn = document.getElementById("rainbow");
-rainbowBtn.addEventListener('click',rainbowMode);
 
-function rainbowMode(){
-    console.log("activate rainbow mode");
-    classicModeOn = false;
-    rainbowModeOn = true;
-    eraserModeOn = false;
-}
 
-//Add a button to go back to "classic mode"
-const classicBtn = document.getElementById("classic");
-classicBtn.addEventListener('click', classicMode);
-
-function classicMode(){
-    console.log("activate classic mode");
-    classicModeOn = true;
-    rainbowModeOn = false;
-    eraserModeOn = false;
-}
-
-//add a button to go to "eraser mode"
-const eraserBtn = document.getElementById("eraser");
-eraserBtn.addEventListener('click', eraserMode);
-
-function eraserMode(){
-    console.log("activate eraser")
-    classicModeOn = false;
-    rainbowModeOn = false;
-    eraserModeOn = true;
-}
-
-//add a slider or input to select grid size, ie 16x16, 48x48 etc
 
 
 
